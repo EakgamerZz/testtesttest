@@ -417,6 +417,63 @@
             </div>
         </div>
 
+        <!-- Window: Media Hub (Netflix Style) -->
+        <div class="window" id="win-netflix"
+            style="top: 10%; left: 15%; width: 800px; height: 500px; display: none; background: #141414; color: white; resize: both; overflow: hidden; padding-bottom: 20px;">
+            <div class="title-bar"
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%); border: none; position: absolute; width: 100%; z-index: 200;">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-netflix', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-netflix', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-netflix', event)"></span>
+                </div>
+                <!-- Title in Center -->
+                <div class="title"
+                    style="color: #E50914; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">Media Hub
+                </div>
+            </div>
+            <div class="window-content netflix-content" style="padding: 0; overflow-x: hidden;">
+                <!-- Hero Banner -->
+                <div class="netflix-hero">
+                    <div class="hero-bg"></div>
+                    <div class="hero-content">
+                        <h1><span style="color: #E50914;">N</span>etwork & <br>Intelligent Systems</h1>
+                        <p>Join the revolution of AI, IoT, and Data Science. Master the skills of the future today.</p>
+                        <div class="hero-buttons">
+                            <button class="netflix-btn primary"><i class="fa-solid fa-play"></i> Play Intro</button>
+                            <button class="netflix-btn secondary"><i class="fa-solid fa-circle-info"></i> More
+                                Info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rows -->
+                <div class="netflix-rows-container">
+                    <h3>Trending Now</h3>
+                    <div class="netflix-row">
+                        <div class="netflix-card" onclick="openWindow('win-unit1')">
+                            <img src="img_unit1.png" alt="App Dev">
+                            <div class="card-info">App Development</div>
+                        </div>
+                        <div class="netflix-card" onclick="openWindow('win-unit2')">
+                            <img src="img_unit2.png" alt="Data Science">
+                            <div class="card-info">Data Science</div>
+                        </div>
+                        <div class="netflix-card" onclick="openWindow('win-unit3')">
+                            <img src="img_unit3.png" alt="IoT">
+                            <div class="card-info">IoT Smart Home</div>
+                        </div>
+                        <div class="netflix-card" onclick="openWindow('win-unit4')">
+                            <img src="img_unit4.png" alt="Cyber Safety">
+                            <div class="card-info">Cyber Security</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Dock (Bottom Icons) -->
@@ -433,6 +490,9 @@
             </div>
             <div class="dock-item" onclick="openWindow('win-works')" title="Works">
                 <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <div class="dock-item" onclick="openWindow('win-netflix')" title="Media Hub">
+                <i class="fa-brands fa-youtube" style="color: #E50914;"></i>
             </div>
             <div class="dock-item" onclick="openWindow('win-contact')" title="Contact">
                 <i class="fa-solid fa-address-card"></i>

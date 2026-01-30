@@ -772,17 +772,6 @@ const quizQuestions = [
     },
     // บทที่ 4: Cyber Safety
     {
-        question: "9. Digital Footprint หมายถึงอะไร?",
-        options: [
-            "รอยเท้าจริงของมนุษย์",
-            "ร่องรอยการใช้งานบนอินเทอร์เน็ต",
-            "รอยนิ้วมือดิจิทัล",
-            "เท้าของหุ่นยนต์"
-        ],
-        answer: 1,
-        unit: 4
-    },
-    {
         question: "10. Cyberbullying คืออะไร?",
         options: [
             "การเล่นเกมออนไลน์",
@@ -791,6 +780,192 @@ const quizQuestions = [
             "การเรียนออนไลน์"
         ],
         answer: 2,
+        unit: 4
+    },
+    // --- New Questions (Expansion) ---
+    // History & Basics
+    {
+        question: "11. ใครถูกยกย่องว่าเป็น 'บิดาแห่ง AI'?",
+        options: ["Alan Turing", "Steve Jobs", "Mark Zuckerberg", "Sam Altman"],
+        answer: 0,
+        unit: 2
+    },
+    {
+        question: "12. โปรแกรม AI แรกที่สามารถเอาชนะแชมป์หมากล้อมโลก (Go) ได้คือ?",
+        options: ["Deep Blue", "AlphaGo", "Watson", "ChatGPT"],
+        answer: 1,
+        unit: 2
+    },
+    {
+        question: "13. การทดสอบเพื่อแยกแยะมนุษย์กับ AI เรียกว่าอะไร?",
+        options: ["IQ Test", "Turing Test", "Speed Test", "Stress Test"],
+        answer: 1,
+        unit: 2
+    },
+    // AI Concepts
+    {
+        question: "14. Machine Learning เรียนรู้จากอะไร?",
+        options: ["เวทมนตร์", "ข้อมูล (Data)", "คู่มือการใช้งาน", "การเดา"],
+        answer: 1,
+        unit: 2
+    },
+    {
+        question: "15. 'Deep Learning' จำลองการทำงานมาจากส่วนใดของมนุษย์?",
+        options: ["หัวใจ", "ดวงตา", "เซลล์ประสาทในสมอง (Neural Networks)", "กล้ามเนื้อ"],
+        answer: 2,
+        unit: 2
+    },
+    {
+        question: "16. ข้อใดคือ Generative AI?",
+        options: ["Excel", "Calculator", "ChatGPT", "Antivirus"],
+        answer: 2,
+        unit: 2
+    },
+    {
+        question: "17. อาการที่ AI ตอบข้อมูลผิดๆ อย่างมั่นใจ เรียกว่าอะไร?",
+        options: ["Sleeping", "Hallucination (ภาพหลอน)", "Dreaming", "Thinking"],
+        answer: 1,
+        unit: 4
+    },
+    // AI Tools for Classroom
+    {
+        question: "18. เครื่องมือใดใช้สร้างภาพจากข้อความ (Text-to-Image)?",
+        options: ["Microsoft Word", "Midjourney", "Google Maps", "YouTube"],
+        answer: 1,
+        unit: 1
+    },
+    {
+        question: "19. Canva Magic Studio ช่วยทำอะไร?",
+        options: ["ซ่อมคอมพิวเตอร์", "ออกแบบกราฟิกด้วย AI", "เขียนโปรแกรม C++", "ไวรัสสแกน"],
+        answer: 1,
+        unit: 1
+    },
+    {
+        question: "20. หากต้องการสรุปบทความยาวๆ ควรใช้ AI ตัวใด?",
+        options: ["ChatGPT / Gemini", "Paint", "Notepad", "Calculator"],
+        answer: 0,
+        unit: 1
+    },
+    {
+        question: "21. Perplexity AI มีจุดเด่นคืออะไร?",
+        options: ["สร้างวิดีโอ", "ค้นหาข้อมูลพร้อมอ้างอิงแหล่งที่มา", "เล่นเกม", "แต่งเพลง"],
+        answer: 1,
+        unit: 2
+    },
+    {
+        question: "22. เครื่องมือใดช่วยสร้างคำถาม Quiz อัตโนมัติ?",
+        options: ["Quizizz AI", "Netflix", "Spotify", "Instagram"],
+        answer: 0,
+        unit: 1
+    },
+    {
+        question: "23. Gemini เป็น AI ของบริษัทใด?",
+        options: ["Apple", "Microsoft", "Google", "Facebook"],
+        answer: 2,
+        unit: 2
+    },
+    // IoT & Security Extension
+    {
+        question: "24. อุปกรณ์ IoT เชื่อมต่อกันผ่านอะไรเป็นหลัก?",
+        options: ["Bluetooth", "สาย Cable", "Internet / WiFi", "คลื่นวิทยุ FM"],
+        answer: 2,
+        unit: 3
+    },
+    {
+        question: "25. เซ็นเซอร์ใดใช้วัดอุณหภูมิ?",
+        options: ["Ultrasonic", "DHT11", "Servo", "LED"],
+        answer: 1,
+        unit: 3
+    },
+    {
+        question: "26. ข้อใดคือรหัสผ่านที่ปลอดภัย (Strong Password)?",
+        options: ["123456", "password", "P@ssw0rd_2024!", "admin"],
+        answer: 2,
+        unit: 4
+    },
+    {
+        question: "27. Phishing คือการโจมตีแบบใด?",
+        options: ["ตกปลา", "สร้างเว็บไซต์ปลอมเพื่อหลอกเอาข้อมูล", "ทำลายฮาร์ดดิสก์", "ดักฟังโทรศัพท์"],
+        answer: 1,
+        unit: 4
+    },
+    {
+        question: "28. 2FA (Two-Factor Authentication) คืออะไร?",
+        options: ["การสมัคร 2 บัญชี", "การยืนยันตัวตน 2 ขั้นตอน", "การใช้คอม 2 เครื่อง", "การมีแฟน 2 คน"],
+        answer: 1,
+        unit: 4
+    },
+    // Ethics & Future
+    {
+        question: "29. Deepfake คือเทคโนโลยีเกี่ยวกับอะไร?",
+        options: ["การดำน้ำลึก", "การปลอมแปลงใบหน้า/เสียงด้วย AI", "การขุดเจาะข้อมูล", "การทำอาหาร"],
+        answer: 1,
+        unit: 4
+    },
+    {
+        question: "30. ข้อใดคือจริยธรรมในการใช้ AI?",
+        options: ["ใช้ทำการบ้านส่งครูทั้งหมด", "ใช้สร้างข่าวปลอม", "ตรวจสอบความถูกต้องและไม่ละเมิดลิขสิทธิ์", "ใช้แกล้งเพื่อน"],
+        answer: 2,
+        unit: 4
+    },
+    {
+        question: "31. Prompt Engineering คืออะไร?",
+        options: ["วิศวกรรมโยธา", "ศิลปะการปั้น", "เทคนิคการเขียนคำสั่งให้ AI ทำงานได้ดีที่สุด", "การซ่อมบำรุง AI"],
+        answer: 2,
+        unit: 1
+    },
+    {
+        question: "32. Large Language Model (LLM) คือโมเดลแบบใด?",
+        options: ["โมเดลภาษาขนาดเล็ก", "โมเดลภาษาขนาดใหญ่ที่เข้าใจภาษามนุษย์", "โมเดลหุ่นยนต์", "โมเดลตึกสูง"],
+        answer: 1,
+        unit: 2
+    },
+    {
+        question: "33. Claude เป็น AI ของบริษัทใด?",
+        options: ["OpenAI", "Anthropic", "Google", "Meta"],
+        answer: 1,
+        unit: 2
+    },
+    {
+        question: "34. ข้อใด *ไม่ใช่* ประโยชน์ของ AI ในการศึกษา?",
+        options: ["ช่วยวางแผนการสอน", "ช่วยสร้างสื่อการสอน", "ช่วยลอกการบ้านเพื่อน", "ช่วยอธิบายบทเรียนที่ซับซ้อน"],
+        answer: 2,
+        unit: 4
+    },
+    {
+        question: "35. Computer Vision เกี่ยวข้องกับสิ่งใด?",
+        options: ["เสียง", "ภาพและวิดีโอ", "รสชาติ", "กลิ่น"],
+        answer: 1,
+        unit: 2
+    },
+    {
+        question: "36. NLP (Natural Language Processing) คือ?",
+        options: ["การประมวลผลภาษาธรรมชาติ", "การปลูกป่า", "การออกกำลังกาย", "การเขียนโปรแกรมด้วยภาษาเครื่อง"],
+        answer: 0,
+        unit: 2
+    },
+    {
+        question: "37. Algorithm หมายถึงอะไร?",
+        options: ["ชื่อของ AI", "ขั้นตอนวิธีการแก้ปัญหาเป็นลำดับ", "จังหวะดนตรี", "โปรแกรมไวรัส"],
+        answer: 1,
+        unit: 1
+    },
+    {
+        question: "38. ข้อใดคือตัวอย่างของ Smart City?",
+        options: ["เมืองที่มีแต่ตึกสูง", "เมืองที่ใช้เซ็นเซอร์บริหารจัดการจราจรและพลังงาน", "เมืองที่มีคนฉลาดอยู่เยอะ", "เมืองที่ไม่มีอินเทอร์เน็ต"],
+        answer: 1,
+        unit: 3
+    },
+    {
+        question: "39. หาก AI ทำงานแทนมนุษย์ เราควรปรับตัวอย่างไร?",
+        options: ["ลาออกจากงาน", "ต่อต้าน AI", "เรียนรู้ทักษะใหม่และทำงานร่วมกับ AI (Upskill/Reskill)", "หนีเข้าป่า"],
+        answer: 2,
+        unit: 4
+    },
+    {
+        question: "40. พ.ร.บ. คอมพิวเตอร์ มีไว้เพื่ออะไร?",
+        options: ["จับผิดคนเล่นเกม", "กำกับดูแลและป้องกันการกระทำผิดทางคอมพิวเตอร์", "ทำให้เน็ตช้าลง", "ขายยาดักจับไวรัส"],
+        answer: 1,
         unit: 4
     }
 ];
@@ -961,12 +1136,17 @@ function addWork() {
 
     const title = titleInput.value.trim();
     const unit = unitSelect.value;
-    const link = linkInput.value.trim();
+    let link = linkInput.value.trim();
     const file = fileInput.files[0];
 
     if (!title) {
         alert('กรุณาใส่ชื่อผลงาน');
         return;
+    }
+
+    // Auto-fix URL
+    if (link && !link.startsWith('http://') && !link.startsWith('https://')) {
+        link = 'https://' + link;
     }
 
     const unitNames = {
