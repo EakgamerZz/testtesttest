@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Desktop</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&family=Sarabun:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="center_ui.css">
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div id="welcome-text">Welcome</div>
+        <div class="loading-content hidden-initially">
+            <div class="apple-spinner"></div>
+            <div id="loading-text">0%</div>
+        </div>
+    </div>
+
+    <!-- Star Field Background -->
+    <div id="star-field"></div>
+
+    <!-- Audio Element -->
+    <audio id="ui-click-sound" preload="auto">
+        <source src="COMSE%20%5B116%5D.wav" type="audio/wav">
+    </audio>
+    <audio id="ui-mute-sound" preload="auto">
+        <source src="se00000%2310.wav" type="audio/wav">
+    </audio>
+    <audio id="ui-close-sound" preload="auto">
+        <source src="se00000%2326.wav" type="audio/wav">
+    </audio>
+    <audio id="ui-hover-sound" preload="auto">
+        <source src="COMSE%20%5B115%5D.wav" type="audio/wav">
+    </audio>
+
+    <!-- Center UI (Clock & Theme Toggle) -->
+    <div id="center-ui" class="center-ui hidden-initially">
+        <div class="clock-container">
+            <h1 id="main-clock">11:17</h1>
+            <h2 id="date-display">28 January</h2>
+        </div>
+
+        <div class="theme-switch-wrapper">
+            <input type="checkbox" id="theme-toggle-switch" onchange="toggleThemeFromSwitch(this)">
+            <label for="theme-toggle-switch" class="switch-label">
+                <div class="switch-toggle">
+                    <div class="cloud cloud-1"></div>
+                    <div class="cloud cloud-2"></div>
+                    <div class="star star-1"></div>
+                    <div class="star star-2"></div>
+                    <div class="star star-3"></div>
+                </div>
+            </label>
+        </div>
+
+        <div id="audio-visualizer" class="visualizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+
+    </div>
+
+    <!-- Desktop Area -->
+    <div id="desktop" class="hidden-initially">
+        <!-- Window: Home / About -->
+        <div class="window active" id="win-home" style="top: 10%; left: 10%;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-home', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-home', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-home', event)"></span>
+                </div>
+                <div class="title">Home</div>
+            </div>
+            <div class="window-content">
+                <div class="profile-section">
+                    <img src="https://ui-avatars.com/api/?name=C+S&background=random&size=128" alt="Profile"
+                        class="profile-pic">
+                    <h1>ยินดีต้อนรับสู่<br>โรงเรียนอุตรดิตถ์</h1>
+                    <p>เรียนรู้เทคโนโลยี, Data Science, IoT และการรู้เท่าทันดิจิทัล</p>
+                    <div class="tags">
+                        <span class="tag">#Coding</span>
+                        <span class="tag">#IoT</span>
+                        <span class="tag">#Data</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Window: Lessons / Units -->
+        <div class="window" id="win-lessons" style="top: 15%; left: 30%; display: none;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-lessons', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-lessons', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-lessons', event)"></span>
+                </div>
+                <div class="title">Lessons</div>
+            </div>
+            <div class="window-content">
+                <h2>บทเรียน (Units)</h2>
+                <div class="folder-grid">
+                    <div class="folder-item" onclick="openWindow('win-unit1')">
+                        <i class="fa-solid fa-folder-open folder-icon color-blue"></i>
+                        <span>บทที่ 1: App Dev</span>
+                    </div>
+                    <div class="folder-item" onclick="openWindow('win-unit2')">
+                        <i class="fa-solid fa-folder-open folder-icon color-yellow"></i>
+                        <span>บทที่ 2: Data</span>
+                    </div>
+                    <div class="folder-item" onclick="openWindow('win-unit3')">
+                        <i class="fa-solid fa-folder-open folder-icon color-green"></i>
+                        <span>บทที่ 3: IoT</span>
+                    </div>
+                    <div class="folder-item" onclick="openWindow('win-unit4')">
+                        <i class="fa-solid fa-folder-open folder-icon color-red"></i>
+                        <span>บทที่ 4: Safety</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Window: Works -->
+        <div class="window" id="win-works" style="top: 20%; left: 40%; display: none;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-works', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-works', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-works', event)"></span>
+                </div>
+                <div class="title">Student Works</div>
+            </div>
+            <div class="window-content">
+                <h2><i class="fa-solid fa-folder-open"></i> ผลงานนักเรียน</h2>
+
+                <!-- Add Work Form -->
+                <div class="add-work-form">
+                    <h3><i class="fa-solid fa-plus-circle"></i> เพิ่มผลงานใหม่</h3>
+                    <div class="form-group">
+                        <label for="work-title">ชื่อผลงาน</label>
+                        <input type="text" id="work-title" placeholder="เช่น แอปคำนวณ BMI">
+                    </div>
+                    <div class="form-group">
+                        <label for="work-unit">บทเรียน</label>
+                        <select id="work-unit">
+                            <option value="1">บทที่ 1: App Development</option>
+                            <option value="2">บทที่ 2: Data Science</option>
+                            <option value="3">บทที่ 3: IoT</option>
+                            <option value="4">บทที่ 4: Cyber Safety</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="work-file">แนบไฟล์ (ถ้ามี)</label>
+                        <input type="file" id="work-file" class="file-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="work-link">หรือใส่ลิงก์</label>
+                        <input type="url" id="work-link" placeholder="https://...">
+                    </div>
+                    <button class="quiz-btn primary" onclick="addWork()">
+                        <i class="fa-solid fa-plus"></i> เพิ่มผลงาน
+                    </button>
+                </div>
+
+                <!-- Works List -->
+                <div class="works-list" id="works-list">
+                    <h3><i class="fa-solid fa-list"></i> รายการผลงาน</h3>
+                    <div id="works-container">
+                        <!-- Works will be loaded by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Window: Contact -->
+        <div class="window" id="win-contact" style="top: 25%; left: 50%; display: none;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-contact', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-contact', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-contact', event)"></span>
+                </div>
+                <div class="title">Contact</div>
+            </div>
+            <div class="window-content">
+                <ul class="contact-list">
+                    <li><i class="fa-brands fa-facebook"></i> Kru Com Sci</li>
+                    <li><i class="fa-brands fa-line"></i> @kru.comsci</li>
+                    <li><i class="fa-solid fa-envelope"></i> teacher@school.ac.th</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Window: Unit 1 App Dev -->
+        <div class="window" id="win-unit1" style="top: 15%; left: 35%; display: none;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-unit1', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-unit1', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-unit1', event)"></span>
+                </div>
+                <div class="title">Unit 1: Application Development</div>
+            </div>
+            <div class="window-content">
+                <img src="img_unit1.png" alt="App Development" class="unit-hero-img">
+                <h2>บทที่ 1: การพัฒนาแอปพลิเคชัน</h2>
+                <p>เรียนรู้การสร้างแอปพลิเคชันบนมือถือโดยไม่ต้องเขียนโค้ดซับซ้อน ใช้การลากและวางแบบ Block-based
+                    Programming</p>
+
+                <h3><i class="fa-solid fa-lightbulb"></i> หัวข้อที่เรียน</h3>
+                <ul>
+                    <li>แนวคิดเชิงคำนวณ (Computational Thinking)</li>
+                    <li>การวางแผนและออกแบบแอปพลิเคชัน</li>
+                    <li>การใช้งาน Block-based Programming</li>
+                    <li>การทดสอบและเผยแพร่แอป</li>
+                </ul>
+
+                <h3><i class="fa-solid fa-link"></i> แหล่งเรียนรู้</h3>
+                <ul class="resource-links">
+                    <li><a href="https://appinventor.mit.edu/" target="_blank"><i class="fa-solid fa-rocket"></i> MIT
+                            App Inventor - สร้างแอป Android</a></li>
+                    <li><a href="https://thunkable.com/" target="_blank"><i class="fa-solid fa-mobile-screen"></i>
+                            Thunkable - สร้างแอป iOS & Android</a></li>
+                    <li><a href="https://scratch.mit.edu/" target="_blank"><i class="fa-solid fa-cat"></i> Scratch -
+                            เรียนรู้ Block Programming</a></li>
+                    <li><a href="https://code.org/" target="_blank"><i class="fa-solid fa-graduation-cap"></i> Code.org
+                            - บทเรียนเขียนโค้ดเบื้องต้น</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Window: Unit 2 Data -->
+        <div class="window" id="win-unit2" style="top: 18%; left: 38%; display: none;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-unit2', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-unit2', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-unit2', event)"></span>
+                </div>
+                <div class="title">Unit 2: Data Science</div>
+            </div>
+            <div class="window-content">
+                <img src="img_unit2.png" alt="Data Science" class="unit-hero-img">
+                <h2>บทที่ 2: วิทยาการข้อมูล (Data Science)</h2>
+                <p>เรียนรู้การรวบรวม จัดเก็บ วิเคราะห์ และนำเสนอข้อมูลอย่างมีประสิทธิภาพ เพื่อนำไปใช้ตัดสินใจ</p>
+
+                <h3><i class="fa-solid fa-lightbulb"></i> หัวข้อที่เรียน</h3>
+                <ul>
+                    <li>ประเภทของข้อมูล (Data Types)</li>
+                    <li>การทำความสะอาดข้อมูล (Data Cleaning)</li>
+                    <li>การวิเคราะห์ข้อมูลเบื้องต้น (Data Analysis)</li>
+                    <li>การสร้างกราฟและแผนภูมิ (Data Visualization)</li>
+                </ul>
+
+                <h3><i class="fa-solid fa-link"></i> แหล่งเรียนรู้</h3>
+                <ul class="resource-links">
+                    <li><a href="https://www.kaggle.com/learn" target="_blank"><i class="fa-solid fa-chart-line"></i>
+                            Kaggle Learn - คอร์สเรียน Data Science ฟรี</a></li>
+                    <li><a href="https://public.tableau.com/" target="_blank"><i class="fa-solid fa-chart-pie"></i>
+                            Tableau Public - สร้าง Dashboard ฟรี</a></li>
+                    <li><a href="https://lookerstudio.google.com/" target="_blank"><i class="fa-brands fa-google"></i>
+                            Google Looker Studio - สร้างรายงาน</a></li>
+                    <li><a href="https://www.datawrapper.de/" target="_blank"><i class="fa-solid fa-chart-bar"></i>
+                            Datawrapper - สร้างกราฟออนไลน์</a></li>
+                    <li><a href="https://docs.google.com/spreadsheets" target="_blank"><i class="fa-solid fa-table"></i>
+                            Google Sheets - จัดการข้อมูลเบื้องต้น</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Window: Unit 3 IoT -->
+        <div class="window" id="win-unit3" style="top: 21%; left: 41%; display: none;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-unit3', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-unit3', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-unit3', event)"></span>
+                </div>
+                <div class="title">Unit 3: Internet of Things</div>
+            </div>
+            <div class="window-content">
+                <img src="img_unit3.png" alt="IoT" class="unit-hero-img">
+                <h2>บทที่ 3: อินเทอร์เน็ตของสรรพสิ่ง (IoT)</h2>
+                <p>เรียนรู้การเชื่อมต่ออุปกรณ์เข้ากับอินเทอร์เน็ต เพื่อควบคุมและรับส่งข้อมูลอัตโนมัติ</p>
+
+                <h3><i class="fa-solid fa-lightbulb"></i> หัวข้อที่เรียน</h3>
+                <ul>
+                    <li>องค์ประกอบของระบบ IoT</li>
+                    <li>เซ็นเซอร์และอุปกรณ์ต่างๆ</li>
+                    <li>กรณีศึกษา Smart Home & Smart Farm</li>
+                    <li>การเขียนโปรแกรมควบคุม Microcontroller</li>
+                </ul>
+
+                <h3><i class="fa-solid fa-link"></i> แหล่งเรียนรู้</h3>
+                <ul class="resource-links">
+                    <li><a href="https://www.arduino.cc/en/Guide" target="_blank"><i class="fa-solid fa-microchip"></i>
+                            Arduino Getting Started - เริ่มต้นใช้งาน</a></li>
+                    <li><a href="https://cloud.arduino.cc/" target="_blank"><i class="fa-solid fa-cloud"></i> Arduino
+                            IoT Cloud - เชื่อมต่อออนไลน์</a></li>
+                    <li><a href="https://www.tinkercad.com/circuits" target="_blank"><i class="fa-solid fa-plug"></i>
+                            Tinkercad Circuits - จำลองวงจรออนไลน์</a></li>
+                    <li><a href="https://makecode.microbit.org/" target="_blank"><i class="fa-solid fa-cube"></i>
+                            MakeCode micro:bit - เขียนโค้ดบอร์ด</a></li>
+                    <li><a href="https://projecthub.arduino.cc/" target="_blank"><i class="fa-solid fa-folder-open"></i>
+                            Arduino Project Hub - ไอเดียโปรเจกต์</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Window: Unit 4 Safety -->
+        <div class="window" id="win-unit4" style="top: 24%; left: 44%; display: none;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-unit4', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-unit4', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-unit4', event)"></span>
+                </div>
+                <div class="title">Unit 4: Cyber Safety</div>
+            </div>
+            <div class="window-content">
+                <img src="img_unit4.png" alt="Cyber Safety" class="unit-hero-img">
+                <h2>บทที่ 4: ความปลอดภัยในโลกดิจิทัล</h2>
+                <p>เรียนรู้การใช้เทคโนโลยีอย่างปลอดภัย รู้เท่าทันสื่อ และปกป้องตนเองจากภัยออนไลน์</p>
+
+                <h3><i class="fa-solid fa-lightbulb"></i> หัวข้อที่เรียน</h3>
+                <ul>
+                    <li>Digital Footprint - รอยเท้าดิจิทัล</li>
+                    <li>Cyberbullying - การกลั่นแกล้งออนไลน์</li>
+                    <li>Privacy & Security - ความเป็นส่วนตัวและความปลอดภัย</li>
+                    <li>กฎหมายคอมพิวเตอร์ (พ.ร.บ. คอมพิวเตอร์)</li>
+                    <li>Fake News & Media Literacy - รู้เท่าทันข่าวปลอม</li>
+                </ul>
+
+                <h3><i class="fa-solid fa-link"></i> แหล่งเรียนรู้</h3>
+                <ul class="resource-links">
+                    <li><a href="https://www.commonsense.org/education/digital-citizenship" target="_blank"><i
+                                class="fa-solid fa-shield-halved"></i> Common Sense - Digital Citizenship</a></li>
+                    <li><a href="https://beinternetawesome.withgoogle.com/" target="_blank"><i
+                                class="fa-brands fa-google"></i> Google Be Internet Awesome</a></li>
+                    <li><a href="https://sos.fbi.gov/" target="_blank"><i class="fa-solid fa-user-secret"></i> FBI Safe
+                            Online Surfing</a></li>
+                    <li><a href="https://staysafeonline.org/" target="_blank"><i class="fa-solid fa-lock"></i> Stay Safe
+                            Online - เคล็ดลับความปลอดภัย</a></li>
+                    <li><a href="https://www.stopbullying.gov/" target="_blank"><i class="fa-solid fa-hand"></i>
+                            StopBullying.gov - หยุดการกลั่นแกล้ง</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Window: Quiz -->
+        <div class="window" id="win-quiz" style="top: 10%; left: 20%; display: none; width: 700px;">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <span class="close" onclick="closeWindow('win-quiz', event)"></span>
+                    <span class="minimize" onclick="minimizeWindow('win-quiz', event)"></span>
+                    <span class="maximize" onclick="maximizeWindow('win-quiz', event)"></span>
+                </div>
+                <div class="title">แบบทดสอบ - Quiz</div>
+            </div>
+            <div class="window-content">
+                <h2><i class="fa-solid fa-clipboard-question"></i> แบบทดสอบวิทยาการคำนวณ ม.3</h2>
+                <p>ทดสอบความรู้ของคุณจากทั้ง 4 บทเรียน</p>
+
+                <div class="quiz-progress" id="quiz-progress">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+
+                <div id="quiz-content" class="quiz-container">
+                    <!-- Questions will be loaded by JavaScript -->
+                </div>
+
+                <div id="quiz-result" class="quiz-result" style="display: none;">
+                    <h3>🎉 ผลคะแนนของคุณ</h3>
+                    <div class="score" id="quiz-score">0/10</div>
+                    <p id="quiz-message">ยอดเยี่ยม!</p>
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="quiz-btn secondary" id="btn-prev" onclick="prevQuestion()" style="display: none;">
+                        <i class="fa-solid fa-arrow-left"></i> ก่อนหน้า
+                    </button>
+                    <button class="quiz-btn primary" id="btn-next" onclick="nextQuestion()">
+                        ถัดไป <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="quiz-btn primary" id="btn-submit" onclick="submitQuiz()" style="display: none;">
+                        <i class="fa-solid fa-check"></i> ส่งคำตอบ
+                    </button>
+                    <button class="quiz-btn secondary" id="btn-restart" onclick="restartQuiz()" style="display: none;">
+                        <i class="fa-solid fa-rotate-right"></i> ทำใหม่
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dock (Bottom Icons) -->
+    <div class="dock-container hidden-initially">
+        <div class="dock">
+            <div class="dock-item pulse-glow" onclick="openWindow('win-home')" title="Home">
+                <i class="fa-solid fa-house"></i>
+            </div>
+            <div class="dock-item" onclick="openWindow('win-lessons')" title="Lessons">
+                <i class="fa-solid fa-book"></i>
+            </div>
+            <div class="dock-item" onclick="openWindow('win-quiz')" title="Quiz">
+                <i class="fa-solid fa-clipboard-question"></i>
+            </div>
+            <div class="dock-item" onclick="openWindow('win-works')" title="Works">
+                <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <div class="dock-item" onclick="openWindow('win-contact')" title="Contact">
+                <i class="fa-solid fa-address-card"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <audio id="bg-music" loop>
+        <source src="bgm.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Music Panel (shows on click) -->
+    <div id="music-panel" class="music-panel hidden">
+        <div class="music-panel-header">
+            <h4><i class="fa-solid fa-music"></i> Music Player</h4>
+            <span class="music-panel-close" onclick="toggleMusicPanel()">&times;</span>
+        </div>
+        <div class="music-panel-content">
+            <!-- Embed Container Removed -->
+
+            <div class="current-track" id="current-track-display">
+                <i class="fa-solid fa-compact-disc fa-spin"></i>
+                <span id="current-track-name">記憶の片隅</span>
+            </div>
+
+            <div class="music-controls">
+                <button onclick="toggleMusic()" id="play-pause-btn" title="Play/Pause">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <input type="range" id="volume-slider" min="0" max="100" value="20" title="Volume">
+            </div>
+
+            <!-- Embed Section Removed -->
+
+            <div class="playlist">
+                <label><i class="fa-solid fa-list"></i> Playlist</label>
+                <div id="playlist-container">
+                    <div class="playlist-item active" onclick="playTrack(0)">
+                        <i class="fa-solid fa-music"></i>
+                        <span>記憶の片隅</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div id="music-btn" class="music-btn hidden-initially" onclick="toggleMusicPanel()" title="Music Player">
+        <i class="fa-solid fa-volume-xmark"></i>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+/* --- Center UI --- */
+.center-ui {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    z-index: 0;
+    pointer-events: none;
+    /* Let clicks pass through to background */
+}
+
+/* Allow interaction with the toggle switch */
+.theme-switch-wrapper {
+    pointer-events: auto;
+}
+
+/* Clock Styles */
+.clock-container {
+    text-align: center;
+    color: var(--text-color);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#main-clock {
+    font-size: 5rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1;
+    font-family: 'Prompt', sans-serif;
+}
+
+#date-display {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 10px 0 0;
+    opacity: 0.9;
+}
+
+/* Theme Toggle Switch */
+.theme-switch-wrapper {
+    position: relative;
+    width: 140px;
+    height: 60px;
+    overflow: hidden;
+}
+
+#theme-toggle-switch {
+    display: none;
+}
+
+.switch-label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #87CEEB;
+    /* Day Sky Blue */
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: background 0.5s ease;
+    overflow: hidden;
+}
+
+.switch-toggle {
+    width: 46px;
+    height: 46px;
+    background: #FFD700;
+    /* Sun Yellow */
+    border-radius: 50%;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), background 0.5s;
+    z-index: 2;
+}
+
+/* Clouds for Day Mode */
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.cloud-1 {
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 20px;
+}
+
+.cloud-2 {
+    width: 20px;
+    height: 20px;
+    top: 30px;
+    right: 40px;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+/* Stars for Night Mode (Hidden by default) */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    /* Hidden in day */
+    transition: opacity 0.5s ease 0.2s;
+}
+
+.star-1 {
+    width: 4px;
+    height: 4px;
+    top: 15px;
+    left: 30px;
+}
+
+.star-2 {
+    width: 3px;
+    height: 3px;
+    top: 35px;
+    left: 20px;
+}
+
+.star-3 {
+    width: 2px;
+    height: 2px;
+    top: 25px;
+    left: 45px;
+}
+
+/* --- Night Mode Styles (Checked State) --- */
+#theme-toggle-switch:checked+.switch-label {
+    background: #2C3E50;
+    /* Night Sky */
+}
+
+#theme-toggle-switch:checked+.switch-label .switch-toggle {
+    transform: translateX(80px);
+    background: #F4F6F0;
+    /* Moon Grey */
+    box-shadow: inset -6px -2px 0 0 #CED6D6, 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Add Moon Craters */
+#theme-toggle-switch:checked+.switch-label .switch-toggle::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #CED6D6;
+    border-radius: 50%;
+    top: 10px;
+    left: 10px;
+}
+
+#theme-toggle-switch:checked+.switch-label .switch-toggle::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #CED6D6;
+    border-radius: 50%;
+    bottom: 12px;
+    right: 12px;
+}
+
+/* Move clouds away */
+#theme-toggle-switch:checked+.switch-label .cloud {
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+/* Show stars */
+#theme-toggle-switch:checked+.switch-label .star {
+    opacity: 1;
+}
+
+/* Audio Visualizer */
+.visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 60px;
+    /* Accommodate taller bars */
+}
+
+.bar {
+    width: 4px;
+    height: 5px;
+    /* Initial height */
+    background: white;
+    border-radius: 2px;
+    opacity: 0.8;
+    transition: height 0.02s ease-out;
+    /* Faster response */
+    /* Smooth transition for JS updates */
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        height: 5px;
+    }
+
+    50% {
+        height: 25px;
+    }
+}
+
+.bar:nth-child(odd) {
+    animation-duration: 0.8s;
+}
+
+.bar:nth-child(even) {
+    animation-duration: 1.2s;
+}
+
+.bar:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.bar:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.bar:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.bar:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.bar:nth-child(5) {
+    animation-delay: 0.4s;
+}
